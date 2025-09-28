@@ -65,7 +65,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.446.0",
-    "mongodb": "^6.10.0",
+    "mongodb": "^5.9.0",
     "mongoose": "^8.8.4",
     "next": "13.5.1",
     "next-auth": "^4.24.10",
