@@ -1,9 +1,9 @@
 'use client'
 
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
-import { IProduct } from '@/models/Product'
+import { ProductType } from '@/types/Product'
 
-export interface CartItem extends IProduct {
+export interface CartItem extends ProductType {
   quantity: number
 }
 
@@ -14,14 +14,14 @@ interface CartState {
 }
 
 type CartAction =
-  | { type: 'ADD_ITEM'; payload: IProduct }
+  | { type: 'ADD_ITEM'; payload: ProductType }
   | { type: 'REMOVE_ITEM'; payload: string }
   | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
   | { type: 'CLEAR_CART' }
   | { type: 'LOAD_CART'; payload: CartItem[] }
 
 interface CartContextType extends CartState {
-  addItem: (product: IProduct) => void
+  addItem: (product: ProductType) => void
   removeItem: (productId: string) => void
   updateQuantity: (productId: string, quantity: number) => void
   clearCart: () => void
@@ -125,7 +125,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('cart', JSON.stringify(state.items))
   }, [state.items])
 
-  const addItem = (product: IProduct) => {
+  const addItem = (product: ProductType) => {
     dispatch({ type: 'ADD_ITEM', payload: product })
   }
 

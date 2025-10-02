@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { ArrowRight, Star, ShoppingBag, Truck, Shield } from 'lucide-react'
 import ProductCard from '@/components/ProductCard'
 import { Button } from '@/components/ui/button'
-import { IProduct } from '@/models/Product'
+import { ProductType } from '@/types/Product'
 
 export default function Home() {
-  const [featuredProducts, setFeaturedProducts] = useState<IProduct[]>([])
+  const [featuredProducts, setFeaturedProducts] = useState<ProductType[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

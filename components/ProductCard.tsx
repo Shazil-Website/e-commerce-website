@@ -4,14 +4,14 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ShoppingCart, Star } from 'lucide-react'
-import { IProduct } from '@/models/Product'
+import { ProductType } from '@/types/Product'
 import { useCart } from '@/contexts/CartContext'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 
 interface ProductCardProps {
-  product: IProduct
+  product: ProductType
 }
 
 export default function ProductCard({ product }: ProductCardProps) {

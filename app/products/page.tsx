@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import ProductCard from '@/components/ProductCard'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { IProduct } from '@/models/Product'
+import { ProductType } from '@/types/Product'
 
 const categories = [
   { value: 'all', label: 'All Categories' },
@@ -29,7 +29,7 @@ const sortOptions = [
 
 function ProductsContent() {
   const searchParams = useSearchParams()
-  const [products, setProducts] = useState<IProduct[]>([])
+  const [products, setProducts] = useState<ProductType[]>([])
   const [loading, setLoading] = useState(true)
   const [pagination, setPagination] = useState({
     page: 1,

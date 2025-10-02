@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 
 export interface IProduct extends mongoose.Document {
+  _id: string;
   name: string
   description: string
   price: number

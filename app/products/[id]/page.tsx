@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, ShoppingCart, Star, Truck, Shield, RotateCcw } from 'lucide-react'
-import { IProduct } from '@/models/Product'
+import { ProductType } from '@/types/Product'
 import { useCart } from '@/contexts/CartContext'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -14,7 +14,7 @@ import { Card, CardContent } from '@/components/ui/card'
 export default function ProductDetailsPage() {
   const params = useParams()
   const { addItem } = useCart()
-  const [product, setProduct] = useState<IProduct | null>(null)
+  const [product, setProduct] = useState<ProductType | null>(null)
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1)
 
