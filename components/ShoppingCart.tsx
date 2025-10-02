@@ -1,15 +1,39 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Minus, Plus, Trash2 } from 'lucide-react'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { Minus, Plus, Trash2, Loader2 } from 'lucide-react'
 import { useCart } from '@/contexts/CartContext'
+import LoginDialog from '@/components/LoginDialog'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function ShoppingCart() {
+  const { data: session } = useSession()
+  const router = useRouter()
   const { items, totalPrice, updateQuantity, removeItem } = useCart()
+  const [showLoginDialog, setShowLoginDialog] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const handleCheckout = async () => {
+    if (!session) {
+      setShowLoginDialog(true)
+      return
+    }
+    
+    setLoading(true)
+    // Simulate loading for better UX
+    await new Promise(resolve => setTimeout(resolve, 300))
+    router.push('/checkout')
+    setLoading(false)
+  }
+
+  const handleLoginSuccess = () => {
+    router.push('/checkout')
+  }
 
   if (items.length === 0) {
     return (
@@ -35,7 +59,7 @@ export default function ShoppingCart() {
         </CardHeader>
         <CardContent className="space-y-4">
           {items.map((item) => (
-            <div key={item._id} className="flex items-center space-x-4 p-4 border rounded-lg">
+            <div key={item._id} className="flex items-center space-x-4 p-4 border rounded-lg overflow-auto">
               <div className="relative w-20 h-20 flex-shrink-0">
                 <Image
                   src={item.image}
@@ -94,7 +118,7 @@ export default function ShoppingCart() {
       </Card>
 
       <Card>
-        <CardContent className="p-6">
+        <CardContent className="p-6 overflow-auto">
           <div className="flex justify-between items-center mb-4">
             <span className="text-xl font-semibold">Total:</span>
             <span className="text-2xl font-bold text-indigo-600">
@@ -107,14 +131,23 @@ export default function ShoppingCart() {
                 Continue Shopping
               </Button>
             </Link>
-            <Link href="/checkout" className="flex-1">
-              <Button className="w-full">
-                Proceed to Checkout
-              </Button>
-            </Link>
+            <Button 
+              onClick={handleCheckout}
+              disabled={loading}
+              className="flex-1"
+            >
+              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Proceed to Checkout
+            </Button>
           </div>
         </CardContent>
       </Card>
+
+      <LoginDialog
+        open={showLoginDialog}
+        onOpenChange={setShowLoginDialog}
+        onSuccess={handleLoginSuccess}
+      />
     </div>
   )
 }

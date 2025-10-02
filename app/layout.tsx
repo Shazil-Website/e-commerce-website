@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { SessionProvider } from '@/components/SessionProvider'
 import { CartProvider } from '@/contexts/CartContext'
+import { Toaster } from '@/components/ui/toaster'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -30,6 +31,7 @@ export default function RootLayout({
               </main>
               <Footer />
             </div>
+            <Toaster />
           </CartProvider>
         </SessionProvider>
       </body>

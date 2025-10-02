@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import { ProductType } from '@/types/Product'
+import { useToast } from '@/hooks/use-toast'
 
 export interface CartItem extends ProductType {
   quantity: number
@@ -108,6 +109,7 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 }
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
+  const { toast } = useToast()
   const [state, dispatch] = useReducer(cartReducer, {
     items: [],
     totalItems: 0,
@@ -127,6 +129,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const addItem = (product: ProductType) => {
     dispatch({ type: 'ADD_ITEM', payload: product })
+    toast({
+      variant: "success",
+      title: "Added to Cart",
+      description: `${product.name} has been added to your cart.`
+    })
   }
 
   const removeItem = (productId: string) => {
