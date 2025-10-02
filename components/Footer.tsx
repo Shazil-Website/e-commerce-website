@@ -20,16 +20,16 @@ export default function Footer() {
               We're committed to providing exceptional customer service and fast delivery.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://www.facebook.com/" className="text-gray-400 hover:text-white transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://x.com/" className="text-gray-400 hover:text-white transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://www.instagram.com/" className="text-gray-400 hover:text-white transition-colors">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://www.shaziltech.in/contact" className="text-gray-400 hover:text-white transition-colors">
                 <Mail className="h-5 w-5" />
               </a>
             </div>
@@ -67,7 +67,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Customer Service</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a href="https://www.shaziltech.in/contact" className="text-gray-400 hover:text-white transition-colors">
                   Contact Us
                 </a>
               </li>
@@ -77,7 +77,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <a href="https://www.shaziltech.in/contact" className="text-gray-400 hover:text-white transition-colors">
                   Returns & Exchanges
                 </a>
               </li>
@@ -92,7 +92,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © {new Date().getFullYear()} ECommerce. All rights reserved.
+            © {new Date().getFullYear()} Shaziltech.in. All rights reserved.
           </p>
         </div>
       </div>

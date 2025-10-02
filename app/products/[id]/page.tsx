@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, ShoppingCart, Star, Truck, Shield, RotateCcw } from 'lucide-react'
+import { ArrowLeft, ShoppingCart, Star, Truck, Shield, RotateCcw, Loader2 } from 'lucide-react'
 import { ProductType } from '@/types/Product'
 import { useCart } from '@/contexts/CartContext'
 import { Button } from '@/components/ui/button'
@@ -16,6 +16,7 @@ export default function ProductDetailsPage() {
   const { addItem } = useCart()
   const [product, setProduct] = useState<ProductType | null>(null)
   const [loading, setLoading] = useState(true)
+  const [addingToCart, setAddingToCart] = useState(false)
   const [quantity, setQuantity] = useState(1)
 
   useEffect(() => {
@@ -40,11 +41,18 @@ export default function ProductDetailsPage() {
     }
   }, [params.id])
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (product) {
+      setAddingToCart(true)
+      
+      // Simulate a brief loading state for better UX
+      await new Promise(resolve => setTimeout(resolve, 300))
+      
       for (let i = 0; i < quantity; i++) {
         addItem(product)
       }
+      
+      setAddingToCart(false)
     }
   }
 
@@ -184,12 +192,16 @@ export default function ProductDetailsPage() {
 
             <Button
               onClick={handleAddToCart}
-              disabled={product.stock === 0}
+              disabled={product.stock === 0 || addingToCart}
               size="lg"
               className="w-full sm:w-auto"
             >
-              <ShoppingCart className="mr-2 h-5 w-5" />
-              {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+              {addingToCart ? (
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              ) : (
+                <ShoppingCart className="mr-2 h-5 w-5" />
+              )}
+              {product.stock === 0 ? 'Out of Stock' : addingToCart ? 'Adding...' : 'Add to Cart'}
             </Button>
           </div>
 

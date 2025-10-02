@@ -1,9 +1,9 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ShoppingCart, Star } from 'lucide-react'
+import { ShoppingCart, Star, Loader2 } from 'lucide-react'
 import { ProductType } from '@/types/Product'
 import { useCart } from '@/contexts/CartContext'
 import { Button } from '@/components/ui/button'
@@ -16,10 +16,17 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart()
+  const [loading, setLoading] = useState(false)
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault()
+    setLoading(true)
+    
+    // Simulate a brief loading state for better UX
+    await new Promise(resolve => setTimeout(resolve, 300))
+    
     addItem(product)
+    setLoading(false)
   }
 
   return (
@@ -82,12 +89,16 @@ export default function ProductCard({ product }: ProductCardProps) {
       <CardFooter className="p-4 pt-0">
         <Button
           onClick={handleAddToCart}
-          disabled={product.stock === 0}
+          disabled={product.stock === 0 || loading}
           className="w-full"
           variant={product.stock === 0 ? "secondary" : "default"}
         >
-          <ShoppingCart className="h-4 w-4 mr-2" />
-          {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+          {loading ? (
+            <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+          ) : (
+            <ShoppingCart className="h-4 w-4 mr-2" />
+          )}
+          {product.stock === 0 ? 'Out of Stock' : loading ? 'Adding...' : 'Add to Cart'}
         </Button>
       </CardFooter>
     </Card>

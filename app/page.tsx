@@ -47,7 +47,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/products?category=electronics">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-indigo-600">
+                <Button size="lg" variant="outline" className="border-white hover:bg-white hover:text-indigo-600" style={{color: 'black'}}>
                   Explore Categories
                 </Button>
               </Link>
